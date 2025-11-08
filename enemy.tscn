@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm2v0bdeiqjkp"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_5027i"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_i2k8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0yum"]
+size = Vector2(24, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5fby"]
+size = Vector2(32, 31)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_5027i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(32, 32)
+texture = SubResource("PlaceholderTexture2D_i2k8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 15.5)
+shape = SubResource("RectangleShape2D_c0yum")
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(16, 16.5)
+shape = SubResource("RectangleShape2D_r5fby")
+debug_color = Color(0.986194, 0.115029, 0, 0.42)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(16, 16)
+target_position = Vector2(46, 0)
+
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

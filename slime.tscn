@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6b4pnxedl4rj"]
+
+[ext_resource type="Script" path="res://slime.gd" id="1_lum1e"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hw0ta"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhvkl"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmhox"]
+size = Vector2(16, 16)
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_lum1e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(16, 16)
+texture = SubResource("PlaceholderTexture2D_hw0ta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_bhvkl")
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_mmhox")
+debug_color = Color(0.918336, 0.284434, 0, 0.42)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(8, 8)
+target_position = Vector2(24, 0)
+
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

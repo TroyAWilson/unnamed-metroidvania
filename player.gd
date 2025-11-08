@@ -1,7 +1,6 @@
 
 '''
 	TODO:
-		- Move player to it's own scene
 		- Flesh out state machine
 		- expand movement (variable jump, coyote time, etc.)
 		- dash?
@@ -11,10 +10,12 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+const COYOTE_TIME = 2.2
+var coyote_timer = 0.0
 
 @onready var sprite := $Sprite2D
 @onready var AP := $Sprite2D/AnimationPlayer
-@onready var hurtBox := $Area2D/CollisionShape2D
+@onready var hurtBox := $weapon/player_hurtbox
 
 #state machine
 enum PlayerState {
@@ -28,10 +29,15 @@ var current_state = PlayerState.IDLE
 
 func _ready() -> void:
 	hurtBox.disabled = true
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
-	print(current_state)
-	
+	# print(current_state)
+	if not is_on_floor():
+		coyote_timer += delta
+	else:
+		coyote_timer = 0.0 #reset after jump
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -42,10 +48,9 @@ func _physics_process(delta: float) -> void:
 			current_state = PlayerState.IDLE
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or coyote_timer < COYOTE_TIME):
 		velocity.y = JUMP_VELOCITY
 		current_state = PlayerState.JUMPING
-
 
 	if Input.is_physical_key_pressed(KEY_X):
 		current_state = PlayerState.ATTACKING
@@ -62,10 +67,10 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		if direction < 0:
 			sprite.scale.x = -1
-			hurtBox.position.x = -60
+			hurtBox.position.x = -25
 		else:
 			sprite.scale.x = 1
-			hurtBox.position.x = 0
+			hurtBox.position.x = 25
 
 		velocity.x = direction * SPEED
 	else:
