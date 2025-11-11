@@ -3,23 +3,6 @@
 [ext_resource type="Script" path="res://player.gd" id="1_cfql4"]
 [ext_resource type="Texture2D" uid="uid://x2rcyvrwiyq0" path="res://Sprite-0001.png" id="2_4kdqv"]
 
-[sub_resource type="Animation" id="Animation_o3ndy"]
-resource_name = "idle"
-length = 0.25
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [1, 2, 3, 4]
-}
-
 [sub_resource type="Animation" id="Animation_2uc3w"]
 length = 0.001
 tracks/0/type = "value"
@@ -75,6 +58,23 @@ tracks/1/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="Animation" id="Animation_o3ndy"]
+resource_name = "idle"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du1cn"]
 _data = {
 "RESET": SubResource("Animation_2uc3w"),
@@ -114,3 +114,5 @@ shape = SubResource("RectangleShape2D_2og24")
 debug_color = Color(0.974177, 0.101085, 0.320439, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="body_entered" from="weapon" to="." method="_on_weapon_body_entered"]

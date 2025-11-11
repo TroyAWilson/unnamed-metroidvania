@@ -1,9 +1,12 @@
-class_name Slime
+class_name Slime #this is probably unecessary but nice if I want different variations of slime?
 extends Enemy
 
 func _ready():
-	# Custom initialization for Slime
+	super.handle_ready() #setup base
+	
+	#override slime specific values
 	speed = 500.0  # Override the parent's speed
+	health = 1  # Slimes have less health
 
 func do_slime_behavior():
 	print("Slime is doing its unique behavior!")
