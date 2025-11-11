@@ -14,4 +14,4 @@ func do_slime_behavior():
 func _physics_process(delta: float) -> void:
 	#If they handle movement in the same way you have to call super
 	super._physics_process(delta)
-	do_slime_behavior()
+	#do_slime_behavior()

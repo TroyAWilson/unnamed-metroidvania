@@ -32,4 +32,8 @@ debug_color = Color(0.986194, 0.115029, 0, 0.42)
 position = Vector2(16, 16)
 target_position = Vector2(46, 0)
 
+[node name="FloorDetection" type="RayCast2D" parent="."]
+position = Vector2(44, 23)
+target_position = Vector2(0, 29)
+
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

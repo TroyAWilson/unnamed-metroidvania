@@ -83,7 +83,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7jwd"]
-size = Vector2(15, 31)
+size = Vector2(25, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2og24"]
 size = Vector2(20, 52)
@@ -103,7 +103,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_x7jwd")
 
 [node name="weapon" type="Area2D" parent="."]
